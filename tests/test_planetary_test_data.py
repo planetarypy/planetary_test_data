@@ -37,7 +37,7 @@ def test_default_json():
 
 
 def test_final_path_1():
-    # Test when tests/mission_data/data.json exists
+    """Test when tests/mission_data/data.json exists"""
     os.chdir('test_1')
     assert os.path.exists(data_path_1)
     assert planetary_test_data.setup_json_file() == data_path_1
@@ -46,7 +46,7 @@ def test_final_path_1():
 
 
 def test_final_path_2():
-    # Test when tests/mission_data/ exists but data.json Does Not Exist (DNE)
+    """Test when tests/mission_data exists but data.json Does Not Exist(DNE)"""
     os.chdir('test_2')
     assert os.path.exists(os.path.join('tests', 'mission_data'))
     assert planetary_test_data.setup_json_file() == data_path_1
@@ -57,7 +57,7 @@ def test_final_path_2():
 
 
 def test_final_path_3():
-    # Test when tests/ exists but mission_data/data.json DNE
+    """Test when tests/ exists but mission_data/data.json DNE"""
     os.chdir('test_3')
     assert os.path.exists('tests')
     assert planetary_test_data.setup_json_file() == data_path_1
@@ -70,7 +70,7 @@ def test_final_path_3():
 
 
 def test_final_path_4():
-    # Test when tests/ DNE but mission_data/data.json exist
+    """Test when tests/ DNE but mission_data/data.json exist"""
     os.chdir('test_4')
     assert os.path.exists(data_path_2)
     assert planetary_test_data.setup_json_file() == data_path_2
@@ -79,7 +79,7 @@ def test_final_path_4():
 
 
 def test_final_path_5():
-    # Test when tests/ DNE, mission_data exists but data.json DNE
+    """Test when tests/ DNE, mission_data exists but data.json DNE"""
     os.chdir('test_5')
     assert os.path.exists('mission_data')
     assert planetary_test_data.setup_json_file() == data_path_2
@@ -90,7 +90,7 @@ def test_final_path_5():
 
 
 def test_final_path_6():
-    # Test when tests, mission_data, and data.json DNE
+    """Test when tests, mission_data, and data.json DNE"""
     os.chdir('test_6')
     assert planetary_test_data.setup_json_file() == data_path_2
     os.remove(data_path_2)
@@ -102,7 +102,7 @@ def test_final_path_6():
 
 
 def test_get_mission_data_1():
-    # Test if the image downloaded correctly in tests/mission_data
+    """Test if the image downloaded correctly in tests/mission_data"""
     os.chdir('test_1')
     image_path = os.path.join('tests', 'mission_data',
                               '1p190678905erp64kcp2600l8c1.img')
@@ -116,7 +116,7 @@ def test_get_mission_data_1():
 
 
 def test_get_mission_data_2():
-    # Test if the image downloaded correctly in mission_data when tests DNE
+    """Test if the image downloaded correctly in mission_data when tests DNE"""
     os.chdir('test_4')
     image_path = os.path.join('mission_data',
                               '1p190678905erp64kcp2600l8c1.img')

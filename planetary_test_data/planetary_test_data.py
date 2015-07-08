@@ -5,18 +5,26 @@ import urllib
 import planetary_test_data
 import shutil
 
-"""
-To use setup_json_file()::
-    This will create the directory mission_data in the tests director if the
-    tests directory exists. If tests directory does not, then this will create
-    the mission_data directory in the current working directory. Once the
-    directory is set up, the program will copy over the default data.json file
-    to the new mission_data directory. If everything is set up already, then
-    nothing will happen.
-"""
-
 
 def setup_json_file():
+    """Creates the directories and copies the default data.json to the directory
+
+    Side Effects:
+        The function creates the directory 'mission_data' in the 'tests'
+        directory if the 'tests' directory exists. If 'tests' directory does
+        not exist, then the function will create the 'mission_data' directory
+        in the current working directory. Once the directory is set up, the
+        function will copy over the default data.json file to the new
+        'mission_data' directory. If everything is set up already, then none of
+        the directories will be altered.
+
+    Returns:
+        The path to the `data.json` file.
+
+    Keyword Arguments:
+        None
+    """
+
     default_path = os.path.abspath(planetary_test_data.__file__)
     default_json = os.path.join(os.path.dirname(default_path), 'data.json')
     final_path = os.path.join('tests', 'mission_data', 'data.json')
@@ -44,15 +52,19 @@ def setup_json_file():
         return final_path
 
 
-"""To use get_mission_data()::
-    The function will run through setup_json_file() first. Then, the function
-    will check to see if each product in the data.json file exists in the
-    mission_data directory. If the product does not exist, the function will
-    download the product to the mission_data directory.
-"""
-
-
 def get_mission_data():
+    """Downloads products from data.json
+
+    Side Effects:
+        The function uses the returned path from `setup_json_file()`.
+        The function will check to see if each product in the data.json file
+        exists in the mission_data directory. If the product does not exist,
+        the function will download the product to the mission_data directory.
+
+    Keyword Arguments:
+        None
+    """
+
     data_path = setup_json_file()
     with open(data_path, 'r') as r:
         mission_data = json.load(r)
