@@ -21,7 +21,8 @@ requirements = [
 setup(
     name='planetary_test_data',
     version='0.1.0',
-    description="Planetary Test Data contains a list of planetary data for software testing purposes and utilities to retrieve them.",
+    description="""Planetary Test Data contains a list of planetary data for
+    software testing purposes and utilities to retrieve them.""",
     long_description=readme + '\n\n' + history,
     author="PlanetaryPy Developers",
     author_email='contact@planetarypy.com',
@@ -31,6 +32,7 @@ setup(
     ],
     package_dir={'planetary_test_data':
                  'planetary_test_data'},
+    package_data={'planetary_test_data': ['planetary_test_data/data.json']},
     include_package_data=True,
     install_requires=requirements,
     license="BSD",
@@ -47,5 +49,10 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
-    ]
+    ],
+    entry_points={
+        'console_scripts': [
+            'get_mission_data=planetary_test_data.planetary_test_data:get_mission_data'
+        ],
+    }
 )
