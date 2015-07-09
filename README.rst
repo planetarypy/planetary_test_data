@@ -9,7 +9,8 @@ Planetary Test Data
         :target: https://pypi.python.org/pypi/planetary_test_data
 
 
-Planetary Test Data contains a list of planetary data for software testing purposes and utilities to retrieve them.
+Planetary Test Data contains a list of planetary data for software testing
+purposes and utilities to retrieve them.
 
 * Free software: BSD license
 * Documentation: https://planetary_test_data.readthedocs.org.
@@ -17,4 +18,5 @@ Planetary Test Data contains a list of planetary data for software testing purpo
 Features
 --------
 
-* TODO
+* Downloads all sample Planetary test data listed in the ``data.json`` into
+  ``./mission_data/`` or if ``./tests/mission_data/`` if ``./tests/`` exists.
