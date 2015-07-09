@@ -1,9 +1,13 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import os
 import json
-import urllib
 import planetary_test_data
 import shutil
+try:
+    import urllib.request as urllib
+except:
+    import urllib
 
 
 def setup_json_file():
