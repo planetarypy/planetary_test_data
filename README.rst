@@ -86,11 +86,11 @@ metainformation about the product.  This structure will be extended to support
 generic testing, for instance the ``label`` key will be changed to a
 dictionary that includes product label keys and the values found at those keys.
 
-```
+Below is a sample snippet of a ``data.json`` entry::
+
     "1m298459885effa312p2956m2m1.img": {
         "instrument": "MICROSCOPIC IMAGER", 
         "label": "PDS3", 
         "opens": "True", 
         "url": "http://pds-imaging.jpl.nasa.gov/data/mer/opportunity/mer1mo_0xxx/data/sol1918/edr/1m298459885effa312p2956m2m1.img"
     }, 
-```
