@@ -3,6 +3,11 @@
 History
 -------
 
+0.2.0 (2015-07-11)
+--------------------
+
+* Updated ``data.json`` to contain mission data from many more missions.
+
 0.1.1 (2015-07-09)
 ---------------------
 
