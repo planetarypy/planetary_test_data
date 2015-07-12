@@ -52,7 +52,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'get_mission_data=planetary_test_data.planetary_test_data:get_mission_data'
+            'get_mission_data=planetary_test_data.planetary_test_data:cli'
         ],
     }
 )

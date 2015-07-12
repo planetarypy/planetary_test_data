@@ -4,10 +4,58 @@ import os
 import json
 import planetary_test_data
 import shutil
+import argparse
 try:
     import urllib.request as urllib
 except:
     import urllib
+
+
+class PlanetaryTestDataProducts(object):
+
+    def __init__(self, tags=None, all=None):
+        """Object contains core data projects or that match specified tags.
+
+        Attributes
+        ----------
+        tags : list
+            Contains tags of desired data products.  Default: ``['core']``.  If
+            ['all'] then all data products will be requested.
+        data_path : string
+            Filesystem path to ``data.json`` file.
+        mission_data : dictionary
+            Contains the data products and metadata.
+        directory : string
+            Filesystem path to directory containing the ``data.json`` file.
+        """
+
+        if tags:
+            self.tags = tags
+        else:
+            self.tags = ['core']
+
+        self.data_path = setup_json_file()
+
+        with open(self.data_path, 'r') as r:
+            self.mission_data = json.load(r)
+
+        self.directory = os.path.dirname(self.data_path)
+
+    @property
+    def products(self):
+        """Products that match defined tags"""
+        if 'all' in self.tags:
+            return_list = self.mission_data.keys()
+        else:
+            return_list = []
+            for product in self.mission_data.keys():
+                # If the intersection of the set of tags on the data product
+                # with the set of tags on self is non null, then there is a
+                # match and we should append the product to the returned list
+                if set(self.mission_data[product].get('tags', '')) & set(self.tags):
+                    return_list.append(product)
+
+            return return_list
 
 
 def setup_json_file():
@@ -69,14 +117,18 @@ def get_mission_data():
         None
     """
 
-    data_path = setup_json_file()
-    with open(data_path, 'r') as r:
-        mission_data = json.load(r)
-    products = mission_data.keys()
-    directory = os.path.dirname(data_path)
-    for product in products:
-        if os.path.exists(os.path.join(directory, product)):
+    data = PlanetaryTestDataProducts()
+
+    for product in data.products:
+        if os.path.exists(os.path.join(data.directory, product)):
             pass
         else:
-            urllib.urlretrieve(mission_data[product]['url'],
-                               os.path.join(directory, product))
+            urllib.urlretrieve(data.mission_data[product]['url'],
+                               os.path.join(data.directory, product))
+
+
+def cli():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--all', '-a', help="Download all products.")
+    args = parser.parse_args()
+    get_mission_data()
