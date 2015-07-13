@@ -159,7 +159,7 @@
     "1p190678905erp64kcp2600l8c1.img": {
         "instrument": "PANORAMIC CAMERA LEFT", 
         "label": {
-            "^IMAGE": "538",
+            "^IMAGE": 538,
             "GEOMETRIC_CAMERA_MODEL": {
                 "CALIBRATION_SOURCE_ID": "205"
                 }
@@ -275,7 +275,7 @@
         "instrument": "PANORAMIC CAMERA RIGHT", 
         "tags": ["core"],
         "label": {
-            "^IMAGE": "296",
+            "^IMAGE": 269,
             "GEOMETRIC_CAMERA_MODEL": {
                 "CALIBRATION_SOURCE_ID" : "191"
                 }
