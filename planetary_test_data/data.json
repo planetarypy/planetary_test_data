@@ -158,8 +158,9 @@
     }, 
     "1p190678905erp64kcp2600l8c1.img": {
         "instrument": "PANORAMIC CAMERA LEFT", 
-        "label": "PDS3", 
-        "opens": "True", 
+        "label": "PDS3",
+        "opens": "True",
+        "tags": ["core"],
         "url": "http://pds-geosciences.wustl.edu/mer/mer1-m-pancam-2-edr-sci-v1/mer1pc_0xxx/data/sol0704/1p190678905erp64kcp2600l8c1.img"
     }, 
     "1pp081ilf11cyp00p2425l777m1.img": {
@@ -267,6 +268,7 @@
     }, 
     "2p129641989eth0361p2600r8m1.img": {
         "instrument": "PANORAMIC CAMERA RIGHT", 
+        "tags": ["core"],
         "label": "PDS3", 
         "opens": "True", 
         "url": "http://pds-imaging.jpl.nasa.gov/data/mer/spirit/mer2po_0xxx/data/sol0037/edr/2p129641989eth0361p2600r8m1.img"

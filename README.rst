@@ -17,7 +17,7 @@ purposes and utilities to retrieve them.
 Features
 --------
 
-* Downloads all sample Planetary test data listed in the ``data.json`` into
+* Downloads a core set of sample Planetary test data into
   ``./mission_data/`` or if ``./tests/mission_data/`` if ``./tests/`` exists.
 
 TODO
@@ -42,30 +42,39 @@ See also the Github issues for this project.
 Usage
 ------
 
-To download the full set of planetary test data install this package with pip
+To download the core set of planetary test data install this package with pip
 and then run the command ``get_mission_data``::
 
   pip install planetary_test_data
   get_mission_data
 
-This will take some time since it downloads N GB of planetary data from the
-PDS.
+Additional usage options are shown below::
+
+  usage: get_mission_data [-h] [--all] [--file FILE] [--dir DIR]
+                          [--tags [TAGS [TAGS ...]]]
+
+  optional arguments:
+    -h, --help            show this help message and exit
+    --all, -a             Download all products.
+    --file FILE, -f FILE  Override default data.json by providing path to custom
+                          data.json file.
+    --dir DIR, -d DIR     Directory to place test data products in.
+    --tags [TAGS [TAGS ...]], -t [TAGS [TAGS ...]]
+                          Retrieve products whose tags match those provided
+                          here.
 
 Description
 ------------
 
 Running ``get_mission_data`` will do the following
 
-* If ``tests/mission_data/data.json`` already exists, it just downloads the
-  products listed in that directory.
-* If ``tests/mission_data`` directory exists, ``data.json`` will be placed in
-  that directory and the products listed in ``data.json`` will be downloaded
-  and placed in the ``tests/mission_data``.
-* If there is no ``tests`` directory, a ``mission_data`` directory will be
-  created (if necessary), ``data.json`` placed within that, and the products
-  will be downloaded.
+* If ``tests`` directory exists it will create ``tests/mission_data`` if
+  necessary.  If ``tests`` does not exist, it will just create 
+  ``mission_data`` in the current directory.
+* The data prodcuts tagged to be ``core`` products will be downloaded
+  into the download directory.
 
-Only products which do not exist in the ``mission_data`` directory will be
+Only products which do not exist in the download directory will be
 downloaded.
 
 Mission Data

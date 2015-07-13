@@ -20,7 +20,7 @@ requirements = [
 
 setup(
     name='planetary_test_data',
-    version='0.2.0',
+    version='0.3.0',
     description="""Planetary Test Data contains a list of planetary data for
     software testing purposes and utilities to retrieve them.""",
     long_description=readme + '\n\n' + history,
@@ -52,7 +52,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'get_mission_data=planetary_test_data.planetary_test_data:get_mission_data'
+            'get_mission_data=planetary_test_data.planetary_test_data:cli'
         ],
     }
 )
