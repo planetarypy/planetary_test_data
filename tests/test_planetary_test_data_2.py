@@ -21,10 +21,8 @@ def test_planetary_test_core_products():
     """Tests the list of core data products."""
     data = PlanetaryTestDataProducts()
     assert data.tags == ['core']
-    assert data.products == [
-        u'2p129641989eth0361p2600r8m1.img',
-        u'1p190678905erp64kcp2600l8c1.img'
-    ]
+    assert u'2p129641989eth0361p2600r8m1.img' in data.products
+    assert u'1p190678905erp64kcp2600l8c1.img' in data.products
 
 
 def test_planetary_test_all_products():
