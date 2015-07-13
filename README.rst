@@ -17,7 +17,7 @@ purposes and utilities to retrieve them.
 Features
 --------
 
-* Downloads a cor set of sample Planetary test data into
+* Downloads a core set of sample Planetary test data into
   ``./mission_data/`` or if ``./tests/mission_data/`` if ``./tests/`` exists.
 
 TODO
