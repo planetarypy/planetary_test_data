@@ -3,6 +3,12 @@
 History
 -------
 
+0.3.0 (2015-07-13)
+--------------------
+
+* Rewritten to be driven by command line options rather than by file
+  system contents.  Run ``get_mission_data -h`` to see options.
+
 0.2.0 (2015-07-11)
 --------------------
 
