@@ -3,6 +3,11 @@
 History
 -------
 
+0.3.1 (2015-07-13)
+--------------------
+
+* Updated data.json to support extended PDS product label tests.
+
 0.3.0 (2015-07-13)
 --------------------
 
