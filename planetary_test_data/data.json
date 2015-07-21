@@ -242,6 +242,7 @@
         "instrument": "MICROSCOPIC IMAGER", 
         "label": "PDS3", 
         "opens": "True", 
+        "tags": ["core"],
         "url": "http://pds-geosciences.wustl.edu/mer/mer2-m-mi-3-rdr-sci-v1/mer2mi_1xxx/data/sol0070/2m132591087cfd1800p2977m2f1.img"
     }, 
     "2m133285881eff2232p2971m2f1.img": {
