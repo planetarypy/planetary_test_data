@@ -21,7 +21,8 @@
     }, 
     "0047MH0000110010100214C00_DRCL.IMG": {
         "instrument": "MARS HAND LENS IMAGER CAMERA", 
-        "opens": "False", 
+        "opens": "False",
+        "tags": ["core"],
         "url": "http://pds-imaging.jpl.nasa.gov/data/msl/MSLMHL_0002/DATA/RDR/SURFACE/0047/0047MH0000110010100214C00_DRCL.IMG"
     }, 
     "0047MH0000110010100214C00_XXXX.DAT": {
@@ -136,8 +137,14 @@
     }, 
     "1p134482118erp0902p2600r8m1.img": {
         "instrument": "PANORAMIC CAMERA RIGHT", 
-        "label": "PDS3", 
-        "opens": "True", 
+        "label": {
+            "^IMAGE": 537,
+            "GEOMETRIC_CAMERA_MODEL":{
+                "CALIBRATION_SOURCE_ID": "213"
+                }
+            }, 
+        "opens": "True",
+        "tags": ["core"], 
         "url": "http://pds-imaging.jpl.nasa.gov/data/mer/opportunity/mer1po_0xxx/data/sol0071/edr/1p134482118erp0902p2600r8m1.img"
     }, 
     "1p134482118sfl0902p2600l8m1.img": {
@@ -640,7 +647,14 @@
     "h58n3118.img": {
         "instrument": "HIGH RESOLUTION CAMERA", 
         "label": "PDS3", 
-        "opens": "True", 
+        "opens": "True",
+        "label": {
+            "^IMAGE": 26,
+            "IMAGE_MAP_PROJECTION": {
+                "COORDINATE_SYSTEM_NAME": "PLANETOGRAPHIC"
+                }
+            },
+        "tags": ["core"], 
         "url": "http://pdsimage.wr.usgs.gov/archive/clem1-l-h-5-dim-mosaic-v1.0/cl_6016/hxxx3118/h58n3118.img"
     }, 
     "h9335_0000_p12.img": {
@@ -723,8 +737,14 @@
     }, 
     "r01090al.img": {
         "instrument": "ROVER CAMERA LEFT", 
-        "label": "PDS3", 
+        "label": {
+            "^IMAGE": 7,
+            "IMAGE": {
+                "INTERCHANGE_FORMAT": "BINARY"
+                }
+            }, 
         "opens": "True", 
+        "tags": ["core"],
         "url": "http://pdsimage.wr.usgs.gov/archive/mpfr-m-apxs-2-edr-v1.0/mprv_0001/rvr_midr/rvr_mos/r01090al.img"
     }, 
     "r9599891.img": {

@@ -23,6 +23,10 @@ def test_planetary_test_core_products():
     assert data.tags == ['core']
     assert u'2p129641989eth0361p2600r8m1.img' in data.products
     assert u'1p190678905erp64kcp2600l8c1.img' in data.products
+    assert u'0047MH0000110010100214C00_DRCL.IMG' in data.products
+    assert u'1p134482118erp0902p2600r8m1.img' in data.products
+    assert u'h58n3118.img' in data.products
+    assert u'r01090al.img' in data.products
 
 
 def test_planetary_test_all_products():
