@@ -9,7 +9,6 @@ Tests for `planetary_test_data` module.
 """
 
 import os
-import re
 import sys
 import shutil
 import tempfile
@@ -94,7 +93,6 @@ class TestPlanetaryTestDataProducts(object):
         assert isinstance(test_ptd.mission_data, dict)
 
     def test_products(self, tempdir):
-        print(CWD)
         test_data = os.path.join(CWD, 'tests', 'test_data.json')
         test_ptd = PlanetaryTestDataProducts(data_file=test_data)
         core_products = [u'1p190678905erp64kcp2600l8c1.img']
@@ -127,6 +125,7 @@ class MockArgs(object):
 
 def test_get_mission_data1(tempdir):
     args = MockArgs()
+    os.mkdir('tests')
     planetary_test_data.get_mission_data(args)
     assert os.path.exists('tests')
     assert os.path.exists(os.path.join('tests', 'mission_data'))
@@ -152,7 +151,7 @@ def test_get_mission_data2(tempdir):
             'data.json'),
         'foo'
     )
-    args = MockArgs(file=os.path.join('foo', 'data.json'))
+    args = MockArgs(_file=os.path.join('foo', 'data.json'))
     planetary_test_data.get_mission_data(args)
     product = '1p190678905erp64kcp2600l8c1.img'
     assert glob(os.path.join('tests', 'mission_data', '*')) == product
@@ -168,7 +167,7 @@ def test_get_mission_data3(tempdir):
         'foo'
     )
     args = MockArgs(
-        file=os.path.join('foo', 'data.json'),
+        _file=os.path.join('foo', 'data.json'),
         _all=True,
     )
     planetary_test_data.get_mission_data(args)
@@ -190,7 +189,7 @@ def test_get_mission_data_4(tempdir):
         'foo'
     )
     args = MockArgs(
-        file=os.path.join('foo', 'data.json'),
+        _file=os.path.join('foo', 'data.json'),
         _dir='store_data',
     )
     planetary_test_data.get_mission_data(args)
