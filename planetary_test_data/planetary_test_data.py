@@ -6,7 +6,7 @@ import planetary_test_data
 import argparse
 try:
     import urllib.request as urllib
-except:
+except ImportError:
     import urllib
 
 
@@ -51,8 +51,8 @@ class PlanetaryTestDataProducts(object):
         else:
             self.tags = ['core']
 
-        with open(self.data_path, 'r') as r:
-            self.mission_data = json.load(r)
+        with open(self.data_path, 'r') as stream:
+            self.mission_data = json.load(stream)
 
         if directory:
             self.directory = directory
@@ -100,12 +100,22 @@ def get_mission_data(args=None):
                                      data_file=args.file)
 
     for product in data.products:
+        image = data.mission_data[product]
         if os.path.exists(os.path.join(data.directory, product)):
             print("Exists: %s" % os.path.join(data.directory, product))
         else:
-            print("Retrieving: %s" % data.mission_data[product]['url'])
-            urllib.urlretrieve(data.mission_data[product]['url'],
+            image_url = image['url']
+            print("Retrieving: %s" % image_url)
+            urllib.urlretrieve(image_url,
                                os.path.join(data.directory, product))
+            if 'url_lbl' in image:
+                lbl_url = image['url_lbl']
+                print("Retrieving: %s" % lbl_url)
+                lbl_name = image['url_lbl'].split('/')[-1]
+                urllib.urlretrieve(
+                    lbl_url,
+                    os.path.join(data.directory, lbl_name),
+                )
 
 
 def cli():
