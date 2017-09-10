@@ -1,0 +1,14 @@
+{
+    "1p190678905erp64kcp2600l8c1.img": {
+        "url": "http://pds-geosciences.wustl.edu/mer/mer1-m-pancam-2-edr-sci-v1/mer1pc_0xxx/data/sol0704/1p190678905erp64kcp2600l8c1.img",
+        "instrument": "Pancam",
+        "tags": ["core"],
+        "opens": "True",
+        "label": "PDS3"
+    },
+    "0025ML0001270000100807E01_DRCL.IMG": {
+        "url": "http://pds-imaging.jpl.nasa.gov/data/msl/MSLMST_0002/DATA/RDR/SURFACE/0025/0025ML0001270000100807E01_DRCL.IMG",
+        "instrument": "MastCam",
+        "opens": "False"
+    }
+}
