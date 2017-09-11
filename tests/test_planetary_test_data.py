@@ -128,70 +128,67 @@ def test_get_mission_data1(tempdir):
     os.mkdir('tests')
     planetary_test_data.get_mission_data(args)
     assert os.path.exists('tests')
-    assert os.path.exists(os.path.join('tests', 'mission_data'))
-    core_products = [
-        '2p129641989eth0361p2600r8m1.img',
-        '1p190678905erp64kcp2600l8c1.img',
-        '0047MH0000110010100214C00_DRCL.IMG',
-        '1p134482118erp0902p2600r8m1.img',
-        'h58n3118.img',
-        'r01090al.img',
-    ]
-    assert glob(os.path.join('tests', 'mission_data', '*')) == core_products
+    base = os.path.join('tests', 'mission_data')
+    assert os.path.exists(base)
+    core_products = sorted([
+        os.path.join(base, '2p129641989eth0361p2600r8m1.img'),
+        os.path.join(base, '1p190678905erp64kcp2600l8c1.img'),
+        os.path.join(base, '0047MH0000110010100214C00_DRCL.IMG'),
+        os.path.join(base, '1p134482118erp0902p2600r8m1.img'),
+        os.path.join(base, 'h58n3118.img'),
+        os.path.join(base, 'r01090al.img'),
+        os.path.join(base, '2m132591087cfd1800p2977m2f1.img'),
+    ])
+    test_products = sorted(glob(os.path.join('tests', 'mission_data', '*')))
+    assert test_products == core_products
     planetary_test_data.get_mission_data(args)
-    assert glob(os.path.join('tests', 'mission_data', '*')) == core_products
+    assert test_products == core_products
 
 
 def test_get_mission_data2(tempdir):
-    os.mkdir('foo')
-    shutil.copy(
-        os.path.join(
-            os.path.abspath(CWD),
-            'planetary_test_data',
-            'data.json'),
-        'foo'
-    )
-    args = MockArgs(_file=os.path.join('foo', 'data.json'))
+    os.mkdir('tests')
+    test_data = os.path.join(
+        os.path.abspath(CWD),
+        'tests',
+        'test_data.json')
+    args = MockArgs(_file=test_data)
     planetary_test_data.get_mission_data(args)
-    product = '1p190678905erp64kcp2600l8c1.img'
-    assert glob(os.path.join('tests', 'mission_data', '*')) == product
+    product = os.path.join(
+        'tests', 'mission_data', '1p190678905erp64kcp2600l8c1.img'
+    )
+    assert glob(os.path.join('tests', 'mission_data', '*')) == [product]
 
 
 def test_get_mission_data3(tempdir):
     os.mkdir('foo')
-    shutil.copy(
-        os.path.join(
-            os.path.abspath(CWD),
-            'planetary_test_data',
-            'data.json'),
-        'foo'
-    )
+    os.mkdir('tests')
+    test_data = os.path.join(
+        os.path.abspath(CWD),
+        'tests',
+        'test_data.json')
     args = MockArgs(
-        _file=os.path.join('foo', 'data.json'),
+        _file=test_data,
         _all=True,
     )
+    base = os.path.join('tests', 'mission_data')
     planetary_test_data.get_mission_data(args)
     products = [
-        '0025ML0001270000100807E01_DRCL.IMG'
-        '1p190678905erp64kcp2600l8c1.img'
+        os.path.join(base, '0025ML0001270000100807E01_DRCL.IMG'),
+        os.path.join(base, '1p190678905erp64kcp2600l8c1.img'),
     ]
     assert glob(os.path.join('tests', 'mission_data', '*')) == products
 
 
-def test_get_mission_data_4(tempdir):
-    os.mkdir('foo')
+def test_get_mission_data4(tempdir):
     os.mkdir('store_dir')
-    shutil.copy(
-        os.path.join(
-            os.path.abspath(CWD),
-            'planetary_test_data',
-            'data.json'),
-        'foo'
-    )
+    test_data = os.path.join(
+        os.path.abspath(CWD),
+        'tests',
+        'test_data.json')
     args = MockArgs(
-        _file=os.path.join('foo', 'data.json'),
-        _dir='store_data',
+        _file=test_data,
+        _dir='store_dir',
     )
     planetary_test_data.get_mission_data(args)
-    product = '1p190678905erp64kcp2600l8c1.img'
-    assert glob(os.path.join('store_data', '*')) == product
+    product = os.path.join('store_dir', '1p190678905erp64kcp2600l8c1.img')
+    assert glob(os.path.join('store_dir', '*')) == [product]
