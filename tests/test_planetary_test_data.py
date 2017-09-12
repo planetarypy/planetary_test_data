@@ -172,11 +172,11 @@ def test_get_mission_data3(tempdir):
     )
     base = os.path.join('tests', 'mission_data')
     planetary_test_data.get_mission_data(args)
-    products = [
+    products = sorted([
         os.path.join(base, '0025ML0001270000100807E01_DRCL.IMG'),
         os.path.join(base, '1p190678905erp64kcp2600l8c1.img'),
-    ]
-    assert glob(os.path.join('tests', 'mission_data', '*')) == products
+    ])
+    assert sorted(glob(os.path.join('tests', 'mission_data', '*'))) == products
 
 
 def test_get_mission_data4(tempdir):
