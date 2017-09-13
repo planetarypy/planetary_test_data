@@ -323,6 +323,11 @@
         "opens": "False", 
         "url": "http://pds-imaging.jpl.nasa.gov/data/go-v_e-ssi-2-redr-v1.0/go_0003/earth/c006101/9500r.img"
     }, 
+    "6413r.img": {
+      "instrument": "SOLID_STATE_IMAGING",
+      "opens": "False",
+      "url": "https://pds-imaging.jpl.nasa.gov/data/galileo/galileo_orbiter/go_0022/i25/io/c052734/6413r.img"
+    }, 
     "ABDR_04_D035_V02.ZIP": {
         "instrument": "CASSINI RADAR", 
         "opens": "False", 
@@ -343,23 +348,28 @@
         "opens": "False", 
         "url": "http://pds-imaging.jpl.nasa.gov/data/voyager/VGISS_0026/TITAN/C3289235_RAW.IMG"
     }, 
-    "CN1052412325M_IF_4.IMG": {
-        "instrument": "MERCURY DUAL IMAGING SYSTEM NARROW ANGLE CAMERA", 
-        "label": "PDS3", 
-        "opens": "True", 
-        "url": "http://pdsimage.wr.usgs.gov/archive/mess-e_v_h-mdis-4-cdr-caldata-v1.0/MSGRMDS_2001/CDR/2014_250/CN1052412325M_IF_4.IMG"
+    "c1639142.imq": {
+    "instrument": "IMAGING SCIENCE SUBSYSTEM - NARROW ANGLE CAMERA",
+    "opens": "False",
+    "url": "http://pdsimage.wr.usgs.gov/Missions/Voyager/vg_0018/io/c1639xxx/c1639142.imq"
     }, 
-    "CN1052412325M_RA_4.IMG": {
-        "instrument": "MERCURY DUAL IMAGING SYSTEM NARROW ANGLE CAMERA", 
-        "label": "PDS3", 
-        "opens": "True", 
-        "url": "http://pdsimage.wr.usgs.gov/archive/mess-e_v_h-mdis-4-cdr-caldata-v1.0/MSGRMDS_2001/CDR/2014_250/CN1052412325M_RA_4.IMG"
+    "CN1052412325M_IF_5.IMG": {
+    "instrument": "MERCURY DUAL IMAGING SYSTEM NARROW ANGLE CAMERA",
+    "label": "PDS3",
+    "opens": "True",
+    "url": "http://pdsimage.wr.usgs.gov/archive/mess-e_v_h-mdis-4-cdr-caldata-v1.0/MSGRMDS_2001/CDR/2014_250/CN1052412325M_IF_5.IMG"
     }, 
-    "DW1026713343K_DE_0.IMG": {
-        "instrument": "MERCURY DUAL IMAGING SYSTEM WIDE ANGLE CAMERA", 
-        "label": "PDS3", 
-        "opens": "True", 
-        "url": "http://pdsimage.wr.usgs.gov/archive/mess-e_v_h-mdis-6-ddr-geomdata-v1.0/MSGRMDS_3001/DDR/2013_318/DW1026713343K_DE_0.IMG"
+    "CN1052412325M_RA_5.IMG": {
+        "instrument": "MERCURY DUAL IMAGING SYSTEM NARROW ANGLE CAMERA",
+        "label": "PDS3",
+        "opens": "True",
+        "url": "http://pdsimage.wr.usgs.gov/archive/mess-e_v_h-mdis-4-cdr-caldata-v1.0/MSGRMDS_2001/CDR/2014_250/CN1052412325M_RA_5.IMG"
+    }, 
+    "DW1026713343K_DE_1.IMG": {
+        "instrument": "MERCURY DUAL IMAGING SYSTEM WIDE ANGLE CAMERA",
+        "label": "PDS3",
+        "opens": "True",
+        "url": "http://pdsimage.wr.usgs.gov/archive/mess-e_v_h-mdis-6-ddr-geomdata-v1.0/MSGRMDS_3001/DDR/2013_318/DW1026713343K_DE_1.IMG"
     }, 
     "EDR2856A.07": {
         "instrument": "Synthetic-Aperture Radar", 
