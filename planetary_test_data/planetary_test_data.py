@@ -135,7 +135,9 @@ def get_mission_json(args):
     )
     with open(data.data_path, 'r') as data_json:
         original_json = json.load(data_json)
-    new_json = {product: original_json[product] for product in data.products}
+    new_json = dict(
+        (product, original_json[product]) for product in data.products
+    )
 
     new_json_path = os.path.join(json_dir, 'data.json')
     with open(new_json_path, 'w') as data_json:
