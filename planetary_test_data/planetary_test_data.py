@@ -83,7 +83,7 @@ class PlanetaryTestDataProducts(object):
         return return_list
 
 
-def get_mission_data(args=None):
+def get_mission_data(args):
     """Downloads products from data.json
 
     Side Effects:
@@ -108,6 +108,46 @@ def get_mission_data(args=None):
                                os.path.join(data.directory, product))
 
 
+def get_mission_json(args):
+    """Download the a subset of or the entire data.json
+
+    The data.json will download to the tests or test directory by default. If
+    a tests or test directory does not exist and a directory is not given, an
+    exception will be raised
+    """
+    if args.dir is None:
+        if os.path.isdir('tests'):
+            json_dir = 'tests'
+        elif os.path.isdir('test'):
+            json_dir = 'test'
+        else:
+            raise ValueError((
+                "Either 'tests' or 'test' must be an existing directory or " +
+                "a directory must be specified with the '-d' flag")
+            )
+    else:
+        json_dir = args.dir
+
+    data = PlanetaryTestDataProducts(
+        all_products=args.all,
+        directory=json_dir,
+        data_file=args.file
+    )
+    with open(data.data_path, 'r') as data_json:
+        original_json = json.load(data_json)
+    new_json = {product: original_json[product] for product in data.products}
+
+    new_json_path = os.path.join(json_dir, 'data.json')
+    with open(new_json_path, 'w') as data_json:
+        json.dump(
+            new_json,
+            data_json,
+            indent=4,
+            separators=(',', ': '),
+            sort_keys=True,
+        )
+
+
 def cli():
     parser = argparse.ArgumentParser()
     parser.add_argument('--all', '-a', help="Download all products.",
@@ -121,4 +161,14 @@ def cli():
                         help="Retrieve products whose tags match those " +
                         "provided here.")
     args = parser.parse_args()
+    return args
+
+
+def _get_mission_data():
+    args = cli()
     get_mission_data(args)
+
+
+def _get_mission_json():
+    args = cli()
+    get_mission_json(args)
