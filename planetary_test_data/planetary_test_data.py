@@ -1,13 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import os
-import sys
 import json
 import planetary_test_data
 import argparse
 try:
     import urllib.request as urllib
-except ImportError:
+except:
     import urllib
 
 
@@ -52,8 +51,8 @@ class PlanetaryTestDataProducts(object):
         else:
             self.tags = ['core']
 
-        with open(self.data_path, 'r') as stream:
-            self.mission_data = json.load(stream)
+        with open(self.data_path, 'r') as r:
+            self.mission_data = json.load(r)
 
         if directory:
             self.directory = directory
@@ -78,14 +77,13 @@ class PlanetaryTestDataProducts(object):
                 # If the intersection of the set of tags on the data product
                 # with the set of tags on self is non null, then there is a
                 # match and we should append the product to the returned list
-                product_tags = set(self.mission_data[product].get('tags', ''))
-                if product_tags & set(self.tags):
+                if set(self.mission_data[product].get('tags', '')) & set(self.tags):
                     return_list.append(product)
 
         return return_list
 
 
-def get_mission_data(args):
+def get_mission_data(args=None):
     """Downloads products from data.json
 
     Side Effects:
@@ -102,67 +100,15 @@ def get_mission_data(args):
                                      data_file=args.file)
 
     for product in data.products:
-        image = data.mission_data[product]
         if os.path.exists(os.path.join(data.directory, product)):
             print("Exists: %s" % os.path.join(data.directory, product))
         else:
-            image_url = image['url']
-            print("Retrieving: %s" % image_url)
-            urllib.urlretrieve(image_url,
+            print("Retrieving: %s" % data.mission_data[product]['url'])
+            urllib.urlretrieve(data.mission_data[product]['url'],
                                os.path.join(data.directory, product))
-            if 'url_lbl' in image:
-                lbl_url = image['url_lbl']
-                print("Retrieving: %s" % lbl_url)
-                lbl_name = image['url_lbl'].split('/')[-1]
-                urllib.urlretrieve(
-                    lbl_url,
-                    os.path.join(data.directory, lbl_name),
-                )
 
 
-def get_mission_json(args):
-    """Download the a subset of or the entire data.json
-
-    The data.json will download to the tests or test directory by default. If
-    a tests or test directory does not exist and a directory is not given, an
-    exception will be raised
-    """
-    if args.dir is None:
-        if os.path.isdir('tests'):
-            json_dir = 'tests'
-        elif os.path.isdir('test'):
-            json_dir = 'test'
-        else:
-            raise ValueError((
-                "Either 'tests' or 'test' must be an existing directory or " +
-                "a directory must be specified with the '-d' flag")
-            )
-    else:
-        json_dir = args.dir
-
-    data = PlanetaryTestDataProducts(
-        all_products=args.all,
-        directory=json_dir,
-        data_file=args.file
-    )
-    with open(data.data_path, 'r') as data_json:
-        original_json = json.load(data_json)
-    new_json = dict(
-        (product, original_json[product]) for product in data.products
-    )
-
-    new_json_path = os.path.join(json_dir, 'data.json')
-    with open(new_json_path, 'w') as data_json:
-        json.dump(
-            new_json,
-            data_json,
-            indent=4,
-            separators=(',', ': '),
-            sort_keys=True,
-        )
-
-
-def cli(args):
+def cli():
     parser = argparse.ArgumentParser()
     parser.add_argument('--all', '-a', help="Download all products.",
                         action="store_true")
@@ -171,18 +117,8 @@ def cli(args):
     parser.add_argument(
         '--dir', '-d', help="Directory to place test data products in."
     )
-    parser.add_argument('--tags', '-t', nargs='?', action='append',
+    parser.add_argument('--tags', '-t', nargs='*', action='store',
                         help="Retrieve products whose tags match those " +
                         "provided here.")
-    parsed_args = parser.parse_args(args)
-    return parsed_args
-
-
-def _get_mission_data():
-    args = cli(sys.argv[1:])
+    args = parser.parse_args()
     get_mission_data(args)
-
-
-def _get_mission_json():
-    args = cli(sys.argv[1:])
-    get_mission_json(args)
