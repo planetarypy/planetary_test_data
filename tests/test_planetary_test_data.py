@@ -138,6 +138,7 @@ def test_get_mission_data1(tempdir):
         os.path.join(base, 'h58n3118.img'),
         os.path.join(base, 'r01090al.img'),
         os.path.join(base, '2m132591087cfd1800p2977m2f1.img'),
+        os.path.join(base, '0047MH0000110010100214C00_DRCL.LBL'),
     ])
     test_products = sorted(glob(os.path.join('tests', 'mission_data', '*')))
     assert test_products == core_products
