@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import os
+import sys
 import json
 import planetary_test_data
 import argparse
@@ -77,7 +78,8 @@ class PlanetaryTestDataProducts(object):
                 # If the intersection of the set of tags on the data product
                 # with the set of tags on self is non null, then there is a
                 # match and we should append the product to the returned list
-                if set(self.mission_data[product].get('tags', '')) & set(self.tags):
+                product_tags = set(self.mission_data[product].get('tags', ''))
+                if product_tags & set(self.tags):
                     return_list.append(product)
 
         return return_list
@@ -160,7 +162,7 @@ def get_mission_json(args):
         )
 
 
-def cli():
+def cli(args):
     parser = argparse.ArgumentParser()
     parser.add_argument('--all', '-a', help="Download all products.",
                         action="store_true")
@@ -169,18 +171,18 @@ def cli():
     parser.add_argument(
         '--dir', '-d', help="Directory to place test data products in."
     )
-    parser.add_argument('--tags', '-t', nargs='*', action='store',
+    parser.add_argument('--tags', '-t', nargs='?', action='append',
                         help="Retrieve products whose tags match those " +
                         "provided here.")
-    args = parser.parse_args()
-    return args
+    parsed_args = parser.parse_args(args)
+    return parsed_args
 
 
 def _get_mission_data():
-    args = cli()
+    args = cli(sys.argv[1:])
     get_mission_data(args)
 
 
 def _get_mission_json():
-    args = cli()
+    args = cli(sys.argv[1:])
     get_mission_json(args)
