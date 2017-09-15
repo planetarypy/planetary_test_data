@@ -10,6 +10,7 @@ Tests for `planetary_test_data` module.
 
 import os
 import sys
+import json
 import shutil
 import tempfile
 from glob import glob
@@ -193,3 +194,106 @@ def test_get_mission_data4(tempdir):
     planetary_test_data.get_mission_data(args)
     product = os.path.join('store_dir', '1p190678905erp64kcp2600l8c1.img')
     assert glob(os.path.join('store_dir', '*')) == [product]
+
+
+def test_get_mission_json1(tempdir):
+    os.mkdir('tests')
+    args = MockArgs()
+    planetary_test_data.get_mission_json(args)
+    assert os.path.exists(os.path.join('tests', 'data.json'))
+    expected_json_keys = sorted([
+        '2p129641989eth0361p2600r8m1.img',
+        '1p190678905erp64kcp2600l8c1.img',
+        '0047MH0000110010100214C00_DRCL.IMG',
+        '1p134482118erp0902p2600r8m1.img',
+        'h58n3118.img',
+        'r01090al.img',
+        '2m132591087cfd1800p2977m2f1.img',
+    ])
+    with open(os.path.join('tests', 'data.json'), 'r') as stream:
+        copied_json = json.load(stream)
+
+    assert sorted(list(copied_json.keys())) == expected_json_keys
+
+
+def test_get_mission_json2(tempdir):
+    os.mkdir('test')
+    args = MockArgs()
+    planetary_test_data.get_mission_json(args)
+    assert os.path.exists(os.path.join('test', 'data.json'))
+    expected_json_keys = sorted([
+        '2p129641989eth0361p2600r8m1.img',
+        '1p190678905erp64kcp2600l8c1.img',
+        '0047MH0000110010100214C00_DRCL.IMG',
+        '1p134482118erp0902p2600r8m1.img',
+        'h58n3118.img',
+        'r01090al.img',
+        '2m132591087cfd1800p2977m2f1.img',
+    ])
+    with open(os.path.join('test', 'data.json'), 'r') as stream:
+        copied_json = json.load(stream)
+
+    assert sorted(list(copied_json.keys())) == expected_json_keys
+
+
+def test_get_mission_json3(tempdir):
+    args = MockArgs()
+    with pytest.raises(ValueError):
+        planetary_test_data.get_mission_json(args)
+
+
+def test_get_mission_json4(tempdir):
+    os.mkdir('diff_dir')
+    args = MockArgs(_dir='diff_dir')
+    planetary_test_data.get_mission_json(args)
+    assert os.path.exists(os.path.join('diff_dir', 'data.json'))
+    expected_json_keys = sorted([
+        '2p129641989eth0361p2600r8m1.img',
+        '1p190678905erp64kcp2600l8c1.img',
+        '0047MH0000110010100214C00_DRCL.IMG',
+        '1p134482118erp0902p2600r8m1.img',
+        'h58n3118.img',
+        'r01090al.img',
+        '2m132591087cfd1800p2977m2f1.img',
+    ])
+    with open(os.path.join('diff_dir', 'data.json'), 'r') as stream:
+        copied_json = json.load(stream)
+
+    assert sorted(list(copied_json.keys())) == expected_json_keys
+
+
+def test_get_mission_json5(tempdir):
+    os.mkdir('test')
+    test_data = os.path.join(
+        os.path.abspath(CWD),
+        'tests',
+        'test_data.json')
+    args = MockArgs(_file=test_data)
+    planetary_test_data.get_mission_json(args)
+    assert os.path.exists(os.path.join('test', 'data.json'))
+    expected_json_keys = sorted([
+        '1p190678905erp64kcp2600l8c1.img',
+    ])
+    with open(os.path.join('test', 'data.json'), 'r') as stream:
+        copied_json = json.load(stream)
+
+    assert sorted(list(copied_json.keys())) == expected_json_keys
+
+
+def test_get_mission_json6(tempdir):
+    os.mkdir('test')
+    test_data = os.path.join(
+        os.path.abspath(CWD),
+        'tests',
+        'test_data.json')
+    args = MockArgs(_file=test_data, _all=True)
+    planetary_test_data.get_mission_json(args)
+    assert os.path.exists(os.path.join('test', 'data.json'))
+    expected_json_keys = sorted([
+        '0025ML0001270000100807E01_DRCL.IMG',
+        '1p190678905erp64kcp2600l8c1.img',
+    ])
+    with open(os.path.join('test', 'data.json'), 'r') as stream:
+        copied_json = json.load(stream)
+
+    assert sorted(list(copied_json.keys())) == expected_json_keys
