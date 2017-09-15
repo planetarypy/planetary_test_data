@@ -297,3 +297,51 @@ def test_get_mission_json6(tempdir):
         copied_json = json.load(stream)
 
     assert sorted(list(copied_json.keys())) == expected_json_keys
+
+
+@pytest.mark.parametrize(
+    'test_args, test_all, test_file, test_dir, test_tags',
+    [
+        ([], False, None, None, None),
+        (['-a'], True, None, None, None),
+        (['-f', 'foo.json'], False, 'foo.json', None, None),
+        (['-d', 'foo'], False, None, 'foo', None),
+        ('-t foo -t bar'.split(), False, None, None, ['foo', 'bar']),
+    ])
+def test_cli(test_args, test_all, test_file, test_dir, test_tags):
+    args = planetary_test_data.cli(test_args)
+    assert args.all == test_all
+    assert args.file == test_file
+    assert args.dir == test_dir
+    assert args.tags == test_tags
+
+
+def test__get_mission_data(tempdir):
+    os.mkdir('store_dir')
+    test_data = os.path.join(
+        os.path.abspath(CWD),
+        'tests',
+        'test_data.json')
+    # args = planetary_test_data.cli(['-f', test_data, '-d', 'store_dir'])
+    sys.argv[1:] = ['-f', test_data, '-d', 'store_dir']
+    planetary_test_data._get_mission_data()
+    product = os.path.join('store_dir', '1p190678905erp64kcp2600l8c1.img')
+    assert glob(os.path.join('store_dir', '*')) == [product]
+
+
+def test__get_mission_json(tempdir):
+    os.mkdir('test')
+    test_data = os.path.join(
+        os.path.abspath(CWD),
+        'tests',
+        'test_data.json')
+    sys.argv[1:] = ['-f', test_data]
+    planetary_test_data._get_mission_json()
+    assert os.path.exists(os.path.join('test', 'data.json'))
+    expected_json_keys = sorted([
+        '1p190678905erp64kcp2600l8c1.img',
+    ])
+    with open(os.path.join('test', 'data.json'), 'r') as stream:
+        copied_json = json.load(stream)
+
+    assert sorted(list(copied_json.keys())) == expected_json_keys
