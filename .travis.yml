@@ -21,4 +21,5 @@ script:
   - 'if [ "$TRAVIS_PYTHON_VERSION" != "2.6" ]; then flake8 planetary_test_data tests; fi'
 
 after_success:
-  - coveralls
+  - 'if [ "$TRAVIS_PYTHON_VERSION" == "2.7" ]; then coveralls; fi'
+  - 'if [ "$TRAVIS_PYTHON_VERSION" == "3.6" ]; then coveralls; fi'
