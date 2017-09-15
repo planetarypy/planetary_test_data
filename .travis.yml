@@ -18,8 +18,7 @@ install:
 # command to run tests, e.g. python setup.py test
 script:
   - py.test --cov=planetary_test_data tests/
-  - flake8 planetary_test_data
-  - flake8 tests
+  - 'if [ "$TRAVIS_PYTHON_VERSION" != "2.6" ]; then flake8 planetary_test_data tests; fi'
 
 after_success:
   - coveralls
