@@ -49,10 +49,13 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
     ],
     entry_points={
         'console_scripts': [
-            'get_mission_data=planetary_test_data.planetary_test_data:cli'
+            'get_mission_data=planetary_test_data.planetary_test_data:_get_mission_data',
+            'get_mission_json=planetary_test_data.planetary_test_data:_get_mission_json',
         ],
     }
 )

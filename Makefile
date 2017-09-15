@@ -37,15 +37,14 @@ clean-test:
 lint:
 	flake8 planetary_test_data tests
 
-test:
+test: lint
 	py.test tests
 
 test-all:
 	tox
 
 coverage:
-	py.test --cov planetary_test_data --cov-report html tests
-	open htmlcov/index.html
+	py.test --cov-report html --cov-report term --cov=planetary_test_data tests/
 
 docs:
 	rm -f docs/planetary_test_data.rst
