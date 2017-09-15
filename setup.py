@@ -54,7 +54,8 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'get_mission_data=planetary_test_data.planetary_test_data:cli'
+            'get_mission_data=planetary_test_data.planetary_test_data:_get_mission_data',
+            'get_mission_json=planetary_test_data.planetary_test_data:_get_mission_json',
         ],
     }
 )

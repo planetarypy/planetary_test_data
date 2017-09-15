@@ -42,5 +42,5 @@ output/*/index.html
 # Sphinx
 docs/_build
 
-#mission_data
+# Mission Data
 tests/mission_data
