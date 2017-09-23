@@ -50,23 +50,47 @@ and then run the command ``get_mission_data``::
   pip install planetary_test_data
   get_mission_data
 
+Additional usage options are shown below::
+
+  usage: get_mission_data [-h] [--all] [--file FILE] [--dir DIR] [--tags [TAGS]]
+                        [--instruments [INSTRUMENTS]] [--missions [MISSIONS]]
+
+  optional arguments:
+    -h, --help            show this help message and exit
+    --all, -a             Download all products.
+    --file FILE, -f FILE  Override default data.json by providing path to custom
+                          data.json file.
+    --dir DIR, -d DIR     Directory to place test data products in.
+    --tags [TAGS], -t [TAGS]
+                          Retrieve products whose tags match those provided
+                          here.
+    --instruments [INSTRUMENTS], -i [INSTRUMENTS]
+                          Get products by instrument
+    --missions [MISSIONS], -m [MISSIONS]
+                          Get products by mission
+
 To get a copy of a subset of ``data.json``::
 
   get_mission_json
 
 Additional usage options are shown below::
 
-  usage: get_mission_data [-h] [--all] [--file FILE] [--dir DIR] [--tags [TAGS]]
+  usage: get_mission_json [-h] [--all] [--file FILE] [--dir DIR] [--tags [TAGS]]
+                        [--instruments [INSTRUMENTS]] [--missions [MISSIONS]]
 
   optional arguments:
-  -h, --help            show this help message and exit
-  --all, -a             Download all products.
-  --file FILE, -f FILE  Override default data.json by providing path to custom
-                        data.json file.
-  --dir DIR, -d DIR     Directory to place test data products in.
-  --tags [TAGS], -t [TAGS]
-                        Retrieve products whose tags match those provided
-                        here.
+    -h, --help            show this help message and exit
+    --all, -a             Download all products.
+    --file FILE, -f FILE  Override default data.json by providing path to custom
+                          data.json file.
+    --dir DIR, -d DIR     Directory to place test data products in.
+    --tags [TAGS], -t [TAGS]
+                          Retrieve products whose tags match those provided
+                          here.
+    --instruments [INSTRUMENTS], -i [INSTRUMENTS]
+                          Get products by instrument
+    --missions [MISSIONS], -m [MISSIONS]
+                          Get products by mission
 
 
 Description
@@ -91,6 +115,16 @@ Running ``get_mission_data`` will do the following:
   useful if there are test images needed that do not exist in or are not
   part of the ``core`` in the default ``data.json`` (see ``get_mission_json``
   below).
+* To get products by mission use the ``--mission`` or ``-m`` flag. This will
+  download all the products from the given mission, even non ``core`` products,
+  unless explicity given ``core`` as a tag. To specify multiple missions, use
+  the flag multiple times. You must spell the mission the same as spelled in
+  `Missions and Instruments`_ (case matters!).
+* To get products by instruments use the ``--instruments`` or ``-i`` flag. This
+  will download all the products from the given instrument, even non ``core``
+  products, unless explicity given ``core`` as a tag. To specify multiple
+  instruments, use the flag multiple times. You must spell the instrument the
+  same as spelled in `Missions and Instruments`_ (case matters!).
 * Only products which do not exist in the download directory will be downloaded.
 
 Running ``get_mission_json`` will do the following:
@@ -150,3 +184,103 @@ Below is a sample snippet of a ``data.json`` entry::
         "opens": "True", 
         "url": "http://pds-imaging.jpl.nasa.gov/data/mer/opportunity/mer1mo_0xxx/data/sol1918/edr/1m298459885effa312p2956m2m1.img"
     },
+
+
+Missions and Instruments
+------------------------
+
+The following missions and their instruments have products available for
+testing:
+
+* 2001 Mars Odyssey
+    * Thermal Emission Imaging System
+* Cassini
+    * Cassini Radar
+    * Imaging Science Subsystem
+    * Imaging Science Subsystem Narrow Angle
+    * Visual And Infrared Mapping Spectrometer
+* Chandrayaan-1
+    * Context Camera
+    * High Resolution Imaging Science Experiment
+    * Mars Color Imager
+    * Moon Mineralogy Mapper
+* Clementine
+    * High Resolution Camera
+    * Long Wave Infrared Camera
+    * Nearinfrared Camera
+    * Ultraviolet/Visible (Uv/Vis) Camera
+    * Ultraviolet/Visible Camera
+* ESA Mars Express
+    * High Resolution Stereo Camera
+* Galileo
+    * Near-Infrared Mapping Spectrometer
+    * Solid_State_Imaging
+* Lunar Reconnaissance Orbiter
+    * Lunar Reconnaissance Orbiter Camera
+    * Lyman Alpha Mapping Project
+    * Mid Infrared Camera 1
+    * Mid Infrared Camera 2
+    * Near Infrared Camera 1
+    * Near Infrared Camera 2
+    * Near Infrared Spectrometer 1
+    * Near Infrared Spectrometer 2 
+    * Total Luminance Photometer
+    * Visible Camera
+    * Visible Spectrometer
+* MESSENGER
+    * Mercury Dual Imaging System Narrow Angle Camera
+    * Mercury Dual Imaging System Narrow Angle Camera, Mercury Dual Imaging System Wide Angle Camera
+    * Mercury Dual Imaging System Wide Angle Camera
+* Magellan
+    * Global Topography Data Record
+    * Radar
+    * Radar System
+    * Synthetic-Aperture Radar
+* Mariner 10
+    * Mariner 10
+* Mariner 9
+    * Imaging Science Subsystem
+* Mars Exploration Rover
+    * Alpha Particle X-Ray Spectrometer
+    * Descent Camera
+    * Front Hazard Avoidance Camera Left
+    * Front Hazard Avoidance Camera Right
+    * Hazard Avoidance Camera
+    * Microscopic Imager
+    * Moessbauer Spectrometer
+    * Navigation Camera
+    * Navigation Camera Left
+    * Panoramic Camera
+    * Panoramic Camera Left
+    * Panoramic Camera Right
+    * Panoromic Camera
+    * Rock Abrasion Tool
+* Mars Global Surveyor
+    * Mars Orbiter Camera - Wide Angle
+    * Mars Orbiter Camera Wide Angle
+    * Near Infrared Mapping Spectrometer
+* Mars Pathfinder
+    * Alpha X-Ray Spectrometer
+    * Alpha X-Ray Spectrometer (Apxs)
+    * Atmospheric Structure Instrument / Meteorology Package
+    * Imager For Mars Pathfinder
+    * Rover Camera Left
+* Mars Science Laboratory
+    * Front Hazard Avoidance Camera Left String B
+    * Mars Descent Imager Camera
+    * Mars Hand Lens Imager Camera
+    * Mast Camera Left
+    * Navigation Camera Left String A
+* Phoenix
+    * Optical Microscope
+    * Robotic Arm Camera
+    * Surface Stereo Imager
+* Viking Lander
+    * Camera_1
+    * Camera_2
+* Viking Orbiter
+    * Viking Visual Imaging Subsystem
+    * Visual_Imaging_Subsystem_Camera_A, Visual_Imaging_Subsystem_Camera_B
+* Voyager
+    * Imaging Science Subsystem
+    * Imaging Science Subsystem - Narrow Angle Camera
