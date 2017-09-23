@@ -550,7 +550,7 @@
         "url_lbl": "http://pds-imaging.jpl.nasa.gov/data/lcross/LCRO_0001/DATA/20091009113022_IMPACT/NSP1/CAL/LCROSS_NSP1_CAL_20091009113218970.LBL"
     },
     "LCROSS_NSP2_CAL_20091009113129443.TAB": {
-        "instrument": "Near Infrared Spectrometer 2 ",
+        "instrument": "Near Infrared Spectrometer 2",
         "mission": "Lunar Reconnaissance Orbiter",
         "opens": "False",
         "url": "http://pds-imaging.jpl.nasa.gov/data/lcross/LCRO_0001/DATA/20091009113022_IMPACT/NSP2/CAL/LCROSS_NSP2_CAL_20091009113129443.TAB",
@@ -571,7 +571,7 @@
         "url_lbl": "http://pds-imaging.jpl.nasa.gov/data/lcross/LCRO_0001/DATA/20091009113022_IMPACT/VIS/RAW/LCROSS_VIS_RAW_20091009113358274.LBL"
     },
     "LCROSS_VSP_CAL_20091009113528839.TAB": {
-        "instrument": " Visible Spectrometer ",
+        "instrument": "Visible Spectrometer",
         "mission": "Lunar Reconnaissance Orbiter",
         "opens": "False",
         "url": "http://pds-imaging.jpl.nasa.gov/data/lcross/LCRO_0001/DATA/20091009113022_IMPACT/VSP/CAL/LCROSS_VSP_CAL_20091009113528839.TAB",
