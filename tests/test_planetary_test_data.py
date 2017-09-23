@@ -115,13 +115,50 @@ class TestPlanetaryTestDataProducts(object):
             u'1p190678905erp64kcp2600l8c1.img',
         ]
 
+        test_ptd = PlanetaryTestDataProducts(
+            data_file=test_data,
+            missions=['Mars Science Laboratory'],
+        )
+        assert test_ptd.products == [u'0025ML0001270000100807E01_DRCL.IMG']
+
+        test_ptd = PlanetaryTestDataProducts(
+            data_file=test_data,
+            missions=['Mars Exploration Rover'],
+        )
+        assert test_ptd.products == [u'1p190678905erp64kcp2600l8c1.img']
+
+        test_ptd = PlanetaryTestDataProducts(
+            data_file=test_data,
+            instruments=['MastCam'],
+        )
+        assert test_ptd.products == [u'0025ML0001270000100807E01_DRCL.IMG']
+
+        test_ptd = PlanetaryTestDataProducts(
+            data_file=test_data,
+            instruments=['Pancam'],
+        )
+        assert test_ptd.products == [u'1p190678905erp64kcp2600l8c1.img']
+
+        test_ptd = PlanetaryTestDataProducts(
+            data_file=test_data,
+            missions=['Mars Science Laboratory'],
+            tags=['core'],
+        )
+        assert sorted(test_ptd.products) == [
+            u'0025ML0001270000100807E01_DRCL.IMG',
+            u'1p190678905erp64kcp2600l8c1.img',
+        ]
+
 
 class MockArgs(object):
 
-    def __init__(self, _all=False, _dir=None, _file=None):
+    def __init__(self, _all=False, _dir=None, _file=None, _instruments=None,
+                 _missions=None):
         self.all = _all
         self.dir = _dir
         self.file = _file
+        self.instruments = _instruments
+        self.missions = _missions
 
 
 def test_get_mission_data1(tempdir):
@@ -194,6 +231,34 @@ def test_get_mission_data4(tempdir):
     planetary_test_data.get_mission_data(args)
     product = os.path.join('store_dir', '1p190678905erp64kcp2600l8c1.img')
     assert glob(os.path.join('store_dir', '*')) == [product]
+
+
+def test_get_mission_data5(tempdir):
+    os.mkdir('tests')
+    test_data = os.path.join(
+        os.path.abspath(CWD),
+        'tests',
+        'test_data.json')
+    args = MockArgs(_file=test_data, _missions=['Mars Science Laboratory'])
+    planetary_test_data.get_mission_data(args)
+    product = os.path.join(
+        'tests', 'mission_data', '0025ML0001270000100807E01_DRCL.IMG'
+    )
+    assert glob(os.path.join('tests', 'mission_data', '*')) == [product]
+
+
+def test_get_mission_data6(tempdir):
+    os.mkdir('tests')
+    test_data = os.path.join(
+        os.path.abspath(CWD),
+        'tests',
+        'test_data.json')
+    args = MockArgs(_file=test_data, _instruments=['MastCam'])
+    planetary_test_data.get_mission_data(args)
+    product = os.path.join(
+        'tests', 'mission_data', '0025ML0001270000100807E01_DRCL.IMG'
+    )
+    assert glob(os.path.join('tests', 'mission_data', '*')) == [product]
 
 
 def test_get_mission_json1(tempdir):
@@ -299,16 +364,56 @@ def test_get_mission_json6(tempdir):
     assert sorted(list(copied_json.keys())) == expected_json_keys
 
 
-@pytest.mark.parametrize(
-    'test_args, test_all, test_file, test_dir, test_tags',
-    [
-        ([], False, None, None, None),
-        (['-a'], True, None, None, None),
-        (['-f', 'foo.json'], False, 'foo.json', None, None),
-        (['-d', 'foo'], False, None, 'foo', None),
-        ('-t foo -t bar'.split(), False, None, None, ['foo', 'bar']),
+def test_get_mission_json7(tempdir):
+    os.mkdir('test')
+    test_data = os.path.join(
+        os.path.abspath(CWD),
+        'tests',
+        'test_data.json')
+    args = MockArgs(_file=test_data, _missions=['Mars Science Laboratory'])
+    planetary_test_data.get_mission_json(args)
+    assert os.path.exists(os.path.join('test', 'data.json'))
+    expected_json_keys = sorted([
+        '0025ML0001270000100807E01_DRCL.IMG',
     ])
-def test_cli(test_args, test_all, test_file, test_dir, test_tags):
+    with open(os.path.join('test', 'data.json'), 'r') as stream:
+        copied_json = json.load(stream)
+
+    assert sorted(list(copied_json.keys())) == expected_json_keys
+
+
+def test_get_mission_json8(tempdir):
+    os.mkdir('test')
+    test_data = os.path.join(
+        os.path.abspath(CWD),
+        'tests',
+        'test_data.json')
+    args = MockArgs(_file=test_data, _instruments=['MastCam'])
+    planetary_test_data.get_mission_json(args)
+    assert os.path.exists(os.path.join('test', 'data.json'))
+    expected_json_keys = sorted([
+        '0025ML0001270000100807E01_DRCL.IMG',
+    ])
+    with open(os.path.join('test', 'data.json'), 'r') as stream:
+        copied_json = json.load(stream)
+
+    assert sorted(list(copied_json.keys())) == expected_json_keys
+
+
+@pytest.mark.parametrize(
+    ('test_args, test_all, test_file, test_dir, test_tags, test_instruments,' +
+        'test_missions'),
+    [
+        ([], False, None, None, None, None, None),
+        (['-a'], True, None, None, None, None, None),
+        (['-f', 'foo.json'], False, 'foo.json', None, None, None, None),
+        (['-d', 'foo'], False, None, 'foo', None, None, None),
+        ('-t f -t b'.split(), False, None, None, ['f', 'b'], None, None),
+        ('-i a -i b'.split(), False, None, None, None, ['a', 'b'], None),
+        ('-i c -i d'.split(), False, None, None, None, None, ['c', 'd']),
+    ])
+def test_cli(test_args, test_all, test_file, test_dir, test_tags,
+             test_instruments, test_missions):
     args = planetary_test_data.cli(test_args)
     assert args.all == test_all
     assert args.file == test_file

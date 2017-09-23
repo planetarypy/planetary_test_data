@@ -14,7 +14,7 @@ except ImportError:
 class PlanetaryTestDataProducts(object):
 
     def __init__(self, tags=None, all_products=None, directory=None,
-                 data_file=None):
+                 data_file=None, missions=[], instruments=[]):
         """Object contains core data projects or that match specified tags.
 
         Attributes
@@ -38,6 +38,8 @@ class PlanetaryTestDataProducts(object):
         """
 
         self.all_products = all_products
+        self.missions = missions or []
+        self.instruments = instruments or []
 
         if data_file:
             self.data_path = data_file
@@ -50,7 +52,10 @@ class PlanetaryTestDataProducts(object):
         if tags:
             self.tags = tags
         else:
-            self.tags = ['core']
+            if not self.missions and not self.instruments:
+                self.tags = ['core']
+            else:
+                self.tags = []
 
         with open(self.data_path, 'r') as stream:
             self.mission_data = json.load(stream)
@@ -71,15 +76,27 @@ class PlanetaryTestDataProducts(object):
     def products(self):
         """List of products that match defined tags"""
         if self.all_products:
-            return_list = self.mission_data.keys()
+            return_list = list(self.mission_data.keys())
         else:
+            tags = set(self.tags)
             return_list = []
-            for product in self.mission_data.keys():
+            for product, data in self.mission_data.items():
                 # If the intersection of the set of tags on the data product
                 # with the set of tags on self is non null, then there is a
                 # match and we should append the product to the returned list
-                product_tags = set(self.mission_data[product].get('tags', ''))
-                if product_tags & set(self.tags):
+                product_tags = set(data.get('tags', ''))
+                tags_match = bool(product_tags & tags)
+                if self.missions == []:
+                    mission_match = False
+                else:
+                    product_mission = str(data.get('mission'))
+                    mission_match = product_mission in self.missions
+                if self.instruments == []:
+                    instrument_match = False
+                else:
+                    product_instrument = str(data.get('instrument'))
+                    instrument_match = product_instrument in self.instruments
+                if tags_match or mission_match or instrument_match:
                     return_list.append(product)
 
         return return_list
@@ -98,8 +115,13 @@ def get_mission_data(args):
         None
     """
 
-    data = PlanetaryTestDataProducts(all_products=args.all, directory=args.dir,
-                                     data_file=args.file)
+    data = PlanetaryTestDataProducts(
+        all_products=args.all,
+        directory=args.dir,
+        data_file=args.file,
+        instruments=args.instruments,
+        missions=args.missions,
+    )
 
     for product in data.products:
         image = data.mission_data[product]
@@ -143,7 +165,9 @@ def get_mission_json(args):
     data = PlanetaryTestDataProducts(
         all_products=args.all,
         directory=json_dir,
-        data_file=args.file
+        data_file=args.file,
+        instruments=args.instruments,
+        missions=args.missions,
     )
     with open(data.data_path, 'r') as data_json:
         original_json = json.load(data_json)
@@ -174,6 +198,10 @@ def cli(args):
     parser.add_argument('--tags', '-t', nargs='?', action='append',
                         help="Retrieve products whose tags match those " +
                         "provided here.")
+    parser.add_argument('--instruments', '-i', nargs='?', action='append',
+                        help='Get products by instrument')
+    parser.add_argument('--missions', '-m', nargs='?', action='append',
+                        help='Get products by mission')
     parsed_args = parser.parse_args(args)
     return parsed_args
 
