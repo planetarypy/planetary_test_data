@@ -1,7 +1,6 @@
-========
+=====
 Usage
-========
+=====
 
-To use Planetary Test Data in a project::
-
-    import planetary_test_data
+See README. It is best to use the commands ``get_mission_data`` and
+``get_mission_json``.
