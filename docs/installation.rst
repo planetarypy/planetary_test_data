@@ -2,11 +2,8 @@
 Installation
 ============
 
-At the command line::
+.. _pip: https://pypi.python.org/pypi/planetary_test_data/
 
-    $ easy_install planetary_test_data
+Download using pip_::
 
-Or, if you have virtualenvwrapper installed::
-
-    $ mkvirtualenv planetary_test_data
     $ pip install planetary_test_data

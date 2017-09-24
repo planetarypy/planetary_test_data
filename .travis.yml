@@ -19,6 +19,10 @@ install:
 script:
   - py.test --cov=planetary_test_data tests/
   - 'if [ "$TRAVIS_PYTHON_VERSION" != "2.6" ]; then flake8 planetary_test_data tests; fi'
+  - 'if [ "$TRAVIS_PYTHON_VERSION" == "2.7" ]; then sphinx-build -b linkcheck docs/ docs/_build/; fi'
+  - 'if [ "$TRAVIS_PYTHON_VERSION" == "2.7" ]; then sphinx-build -b html docs/ docs/_build/; fi'
+  - 'if [ "$TRAVIS_PYTHON_VERSION" == "3.6" ]; then sphinx-build -b linkcheck docs/ docs/_build/; fi'
+  - 'if [ "$TRAVIS_PYTHON_VERSION" == "3.6" ]; then sphinx-build -b html docs/ docs/_build/; fi'
 
 after_success:
   - 'if [ "$TRAVIS_PYTHON_VERSION" == "2.7" ]; then coveralls; fi'

@@ -8,3 +8,5 @@ tox>=2.8.2
 wheel>=0.30.0
 pytest-cov>=2.5.1
 coveralls>=1.2.0
+sphinx
+sphinx_rtd_theme
