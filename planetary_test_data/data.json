@@ -378,15 +378,9 @@
         "url_lbl": "http://pds-imaging.jpl.nasa.gov/data/voyager/VGISS_0026/TITAN/C3289235_RAW.LBL"
     },
     "c1639142.imq": {
-<<<<<<< HEAD
         "instrument": "IMAGING SCIENCE SUBSYSTEM - NARROW ANGLE CAMERA",
         "opens": "False",
         "url": "http://pdsimage.wr.usgs.gov/Missions/Voyager/vg_0018/io/c1639xxx/c1639142.imq"
-=======
-    "instrument": "IMAGING SCIENCE SUBSYSTEM - NARROW ANGLE CAMERA",
-    "opens": "False",
-    "url": "http://pdsimage.wr.usgs.gov/Missions/Voyager/vg_0018/io/c1639xxx/c1639142.imq"
->>>>>>> 690677214402628609f0db483ea5e575d923a6aa
     }, 
     "CN1052412325M_IF_5.IMG": {
         "instrument": "MERCURY DUAL IMAGING SYSTEM NARROW ANGLE CAMERA",
