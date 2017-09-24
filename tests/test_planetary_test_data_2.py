@@ -32,5 +32,5 @@ def test_planetary_test_core_products():
 def test_planetary_test_all_products():
     """Tests the list of all data products."""
     data = PlanetaryTestDataProducts(all_products=True)
-    assert len(data.products) == 153
+    assert len(data.products) == 151
     assert data.all_products is True
