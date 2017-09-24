@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 Welcome to Planetary Test Data's documentation!
-======================================
+===============================================
 
 Contents:
 
@@ -14,6 +14,7 @@ Contents:
    readme
    installation
    usage
+   planetary_test_data
    contributing
    authors
    history
