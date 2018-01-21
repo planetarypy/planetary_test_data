@@ -112,4 +112,4 @@ Tips
 
 To run a subset of tests::
 
-    py.test tests/test_planetary_test_data
+    py.test tests/test_planetary_test_data.py
