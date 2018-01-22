@@ -6,3 +6,5 @@ __version__ = '0.4.0'
 
 
 from .planetary_test_data import PlanetaryTestDataProducts
+
+__all__ = ['PlanetaryTestDataProducts']
