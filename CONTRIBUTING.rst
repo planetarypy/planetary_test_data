@@ -70,9 +70,10 @@ Ready to contribute? Here's how to set up `planetary_test_data` for local develo
     $ cd planetary_test_data/
     $ pip install -r requirements.txt
 
-4. Create a branch for local development. Please branch from ``development`` branch::
+4. Create a branch for local development::
 
-    $ git checkout development
+    $ git checkout master
+    $ git pull origin master
     $ git checkout -b name-of-your-bugfix-or-feature
 
     Now you can make your changes locally.
@@ -91,8 +92,7 @@ Ready to contribute? Here's how to set up `planetary_test_data` for local develo
     $ git commit -m "Your detailed description of your changes."
     $ git push origin name-of-your-bugfix-or-feature
 
-7. Submit a pull request through the GitHub website. Please make sure the base
-   branch is ``development``
+7. Submit a pull request through the GitHub website.
 
 Pull Request Guidelines
 -----------------------

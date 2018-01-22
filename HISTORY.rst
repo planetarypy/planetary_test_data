@@ -3,6 +3,16 @@
 History
 =======
 
+0.4.0 (2018-01-21)
+------------------
+
+* Made new methods/commands to get products by mission and/or instrument
+* Made new methods/command to get a copy of the subset of the data.json file
+* Added several new products
+* Created new documentation
+* Made documentation available on RTD
+* Create new tests to get %100 coverage
+
 0.3.3 (2015-07-27)
 -------------------
 
