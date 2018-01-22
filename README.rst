@@ -8,6 +8,10 @@ Planetary Test Data
 .. image:: https://img.shields.io/pypi/v/planetary_test_data.svg
         :target: https://pypi.python.org/pypi/planetary_test_data
 
+.. image:: https://coveralls.io/repos/github/planetarypy/planetary_test_data/badge.svg
+        :target: https://coveralls.io/github/planetarypy/planetary_test_data
+
+
 
 Planetary Test Data contains a list of planetary data for software testing
 purposes and utilities to retrieve them.
