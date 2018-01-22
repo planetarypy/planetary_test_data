@@ -36,9 +36,11 @@ is open to whoever wants to implement it.
 Write Documentation
 ~~~~~~~~~~~~~~~~~~~
 
+.. _numpydocs: https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt
+
 Planetary Test Data could always use more documentation, whether as part of the
 official Planetary Test Data docs, in docstrings, or even on the web in blog posts,
-articles, and such.
+articles, and such. Please use `numpy docstrings <numpydocs>`_.
 
 Submit Feedback
 ~~~~~~~~~~~~~~~
@@ -70,9 +72,11 @@ Ready to contribute? Here's how to set up `planetary_test_data` for local develo
 
 4. Create a branch for local development::
 
+    $ git checkout master
+    $ git pull origin master
     $ git checkout -b name-of-your-bugfix-or-feature
 
-   Now you can make your changes locally.
+    Now you can make your changes locally.
 
 5. When you're done making changes, check that your changes pass flake8 and the tests, including testing other Python versions with tox::
 
@@ -84,7 +88,7 @@ Ready to contribute? Here's how to set up `planetary_test_data` for local develo
 
 6. Commit your changes and push your branch to GitHub::
 
-    $ git add .
+    $ git add file_was_that_changed.ext
     $ git commit -m "Your detailed description of your changes."
     $ git push origin name-of-your-bugfix-or-feature
 
@@ -99,7 +103,7 @@ Before you submit a pull request, check that it meets these guidelines:
 2. If the pull request adds functionality, the docs should be updated. Put
    your new functionality into a function with a docstring, and add the
    feature to the list in README.rst.
-3. The pull request should work for Python 2.6, 2.7, 3.3, and 3.4, and for PyPy. Check
+3. The pull request should work for Python 2.6, 2.7, 3.3, 3.4, 3.5, and 3.6, and for PyPy. Check
    https://travis-ci.org/planetarypy/planetary_test_data/pull_requests
    and make sure that the tests pass for all supported Python versions.
 
@@ -108,4 +112,4 @@ Tips
 
 To run a subset of tests::
 
-    py.test tests/test_planetary_test_data
+    py.test tests/test_planetary_test_data.py

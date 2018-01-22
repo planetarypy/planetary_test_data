@@ -20,7 +20,7 @@ requirements = [
 
 setup(
     name='planetary_test_data',
-    version='0.3.3',
+    version='0.4.0',
     description="""Planetary Test Data contains a list of planetary data for
     software testing purposes and utilities to retrieve them.""",
     long_description=readme + '\n\n' + history,
